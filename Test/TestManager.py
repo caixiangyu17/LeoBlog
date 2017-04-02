@@ -2,9 +2,9 @@ import http.client
 import json
 import unittest
 
-from test import GetArticleListTest
-from test import GetUserTest
-from test import LoginTest
+from Test import GetArticleListTest
+from Test import GetUserTest
+from Test import LoginTest
 
 url = "127.0.0.1"
 port = 5000
@@ -35,7 +35,7 @@ def post(path, data):
     conn = http.client.HTTPConnection(url, port=port)
     conn.request("POST", path, json.dumps(data), headers)
     r = conn.getresponse()
-    return r.read()
+    return str(r.read(), 'utf-8')
 
 
 def get(path, data):
@@ -43,7 +43,7 @@ def get(path, data):
     conn = http.client.HTTPConnection(url, port=port)
     conn.request("GET", path, json.dumps(data), headers)
     r = conn.getresponse()
-    return r.read()
+    return str(r.read(), 'utf-8')
 
 
 def getByToken(path, data, token):
@@ -51,23 +51,19 @@ def getByToken(path, data, token):
     conn = http.client.HTTPConnection(url, port=port)
     conn.request("GET", path, json.dumps(data), headers)
     r = conn.getresponse()
-    return r.read().decode("utf-8")
+    return str(r.read(), 'utf-8')
 
 
 class TestManager(unittest.TestCase):
     def testLogin1(self):
-        testResult = LoginTest.test3()
+        testResult = LoginTest.test1()
         self.assertRegex(testResult[0], testResult[1])
 
     def testLogin2(self):
-        testResult = LoginTest.test3()
+        testResult = LoginTest.test2()
         self.assertRegex(testResult[0], testResult[1])
 
     def testLogin3(self):
-        testResult = LoginTest.test3()
-        self.assertRegex(testResult[0], testResult[1])
-
-    def testLogin4(self):
         testResult = LoginTest.test3()
         self.assertRegex(testResult[0], testResult[1])
 

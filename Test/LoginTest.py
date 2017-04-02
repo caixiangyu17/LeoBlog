@@ -1,4 +1,4 @@
-from test import TestManager
+from Test import TestManager
 
 
 def test1():
@@ -7,7 +7,7 @@ def test1():
         "username": "caixiangyu17",
         "password": "123456"
     }
-    resultMethod = str(TestManager.post(path, data))
+    resultMethod = TestManager.post(path, data)
     resultExpected = '"code" *: *200'
     return [resultMethod, resultExpected]
 
@@ -18,7 +18,7 @@ def test2():
         "username": "admin",
         "password": "admin"
     }
-    resultMethod = str(TestManager.post(path, data))
+    resultMethod = TestManager.post(path, data)
     resultExpected = '"code" *: *200'
     return [resultMethod, resultExpected]
 
@@ -29,7 +29,7 @@ def test3():
         "username": "admin",
         "password": "adminaaa"
     }
-    resultMethod = str(TestManager.post(path, data))
+    resultMethod = TestManager.post(path, data)
     resultExpected = '"code" *: *401'
     return [resultMethod, resultExpected]
 
@@ -40,6 +40,6 @@ def testLogin4():
         "username": "caixiangyu17",
         "password": "12345"
     }
-    resultMethod = str(TestManager.post(path, data))
+    resultMethod = TestManager.post(path, data)
     resultExpected = '"code" *: *401'
     return [resultMethod, resultExpected]

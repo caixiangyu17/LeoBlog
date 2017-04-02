@@ -1,12 +1,12 @@
 import json
 
-from test import TestManager
+from Test import TestManager
 
 
 def test1():
     path = "/getArticleList"
     token = TestManager.login()
-    resultMethod = str(TestManager.getByToken(path, {}, token))
+    resultMethod = TestManager.getByToken(path, {}, token)
     resultExpected = str(json.dumps({
         "code": 200,
         "data": [
@@ -22,7 +22,7 @@ def test1():
 def test2():
     path = "/getArticleList"
     token = TestManager.loginLeo()
-    resultMethod = str(TestManager.getByToken(path, {}, token))
+    resultMethod = TestManager.getByToken(path, {}, token)
     resultExpected = str(json.dumps({
         "code": 200,
         "data": [

@@ -1,7 +1,7 @@
 import json
 
-from app import ErrorResult
-from test import TestManager
+from App import ErrorResult
+from Test import TestManager
 
 
 def test1():
