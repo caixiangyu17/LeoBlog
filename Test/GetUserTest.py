@@ -24,7 +24,7 @@ def test1():
         },
         "message": "success"
     }))
-    return [resultMethod, resultExpected]
+    return [resultMethod, resultExpected, TestManager.TestManager.TYPE_EQUAL]
 
 
 def test2():
@@ -47,11 +47,11 @@ def test2():
         },
         "message": "success"
     }))
-    return [resultMethod, resultExpected]
+    return [resultMethod, resultExpected, TestManager.TestManager.TYPE_EQUAL]
 
 
 def test3():
     path = "/getUser"
     resultMethod = TestManager.getByToken(path, {"a": "b"}, "sdfsjhldkfjklsdjflk")
     resultExpected = json.dumps(ErrorResult.TOKEN_ERROR)
-    return [resultMethod, resultExpected]
+    return [resultMethod, resultExpected, TestManager.TestManager.TYPE_EQUAL]

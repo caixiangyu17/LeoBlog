@@ -12,15 +12,28 @@ P = '\033[35m'  # purple
 
 stream = StringIO()
 p = subprocess.Popen(['python', 'Main.py'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-runner = unittest.TextTestRunner(stream=stream)
-result = runner.run(unittest.makeSuite(TestManager))
-failedNumber = 0
-for index, fail in enumerate(result.failures, start=0):
-    print(P + "Fail {} -----------> {}".format(index, fail[0]._testMethodName))
-    print(O + fail[1])
-    failedNumber += 1
-if failedNumber == 0:
-    print(G + "Wow, All Passed.")
-else:
-    print(P + "There are {} test(s) failed.".format(failedNumber))
-p.terminate()
+try:
+    runner = unittest.TextTestRunner(stream=stream)
+    result = runner.run(unittest.makeSuite(TestManager))
+    failedNumber = 0
+    for index, fail in enumerate(result.failures, start=0):
+        print(P + "Fail {} -----------> {}".format(index, fail[0]._testMethodName))
+        print(O + fail[1])
+        failedNumber += 1
+
+    for index, error in enumerate(result.errors, start=0):
+        print(P + "Error {} -----------> {}".format(index, error[0]._testMethodName))
+        print(O + error[1])
+
+    print(G + "Tests#: {}, Pass: {}, Fail: {}, Error: {}".format(result.testsRun,
+                                                                 result.testsRun - len(result.errors) - failedNumber,
+                                                                 failedNumber,
+                                                                 len(result.errors)))
+    output = p.stdout.read()
+    # print(output)
+except error:
+    print(P + error)
+finally:
+    # print()
+    print(stream.read())
+    p.terminate()

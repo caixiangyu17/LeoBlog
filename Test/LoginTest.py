@@ -9,7 +9,7 @@ def test1():
     }
     resultMethod = TestManager.post(path, data)
     resultExpected = '"code" *: *200'
-    return [resultMethod, resultExpected]
+    return [resultMethod, resultExpected, TestManager.TestManager.TYPE_REGEX]
 
 
 def test2():
@@ -20,7 +20,7 @@ def test2():
     }
     resultMethod = TestManager.post(path, data)
     resultExpected = '"code" *: *200'
-    return [resultMethod, resultExpected]
+    return [resultMethod, resultExpected, TestManager.TestManager.TYPE_REGEX]
 
 
 def test3():
@@ -31,10 +31,10 @@ def test3():
     }
     resultMethod = TestManager.post(path, data)
     resultExpected = '"code" *: *401'
-    return [resultMethod, resultExpected]
+    return [resultMethod, resultExpected, TestManager.TestManager.TYPE_REGEX]
 
 
-def testLogin4():
+def test4():
     path = "/login"
     data = {
         "username": "caixiangyu17",
@@ -42,4 +42,5 @@ def testLogin4():
     }
     resultMethod = TestManager.post(path, data)
     resultExpected = '"code" *: *401'
-    return [resultMethod, resultExpected]
+    return [resultMethod, resultExpected, TestManager.TestManager.TYPE_REGEX]
+

@@ -13,7 +13,7 @@ def hello_world():
     return json.dumps(users), 404, [('Content-Type', 'application/json;charset=utf-8')]
 
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['POST'])
 def login():
     username = request.get_json()['username']
     password = request.get_json()['password']
@@ -32,9 +32,32 @@ def getArticleList():
     return Api.getArticleList(token)
 
 
-@app.route('/blog/<id>')
-def get_blog(id):
-    return Api.get_blog(id)
+@app.route('/getArticle/<articleId>')
+def getArticle(articleId):
+    return Api.getArticle(articleId)
+
+
+@app.route('/postArticle', methods=['POST'])
+def postArticle():
+    data = {"token": request.headers.get('token'),
+            "title": request.get_json()['title'],
+            "titleEn": request.get_json()['titleEn'],
+            "content": request.get_json()['content'],
+            "contentEn": request.get_json()['contentEn'],
+            }
+    return Api.postArticle(data)
+
+
+@app.route('/delArticle', methods=['DELETE'])
+def delArticle():
+    token = request.headers.get('token')
+    articleId = request.get_json()['articleId']
+    return Api.delArticle(token, articleId)
+
+
+def getUser():
+    token = request.headers.get('token')
+    return Api.getUser(token)
 
 
 if __name__ == '__main__':
